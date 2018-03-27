@@ -7,15 +7,14 @@ const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
 const merge = require('merge-stream');
 const autoprefixer = require('gulp-autoprefixer');
-const cssnext = require('cssnext');
 const svgmin = require('gulp-svgmin');
 const cleancss = require('gulp-clean-css');
 const size = require('gulp-size');
 const browserSync = require('browser-sync').create();
 
 // SCSS locations
-var scssSRC = './scss/*.scss';
-var scssDIST = './dist/scss/';
+var scssSRC = './src/scss/*.scss';
+var scssDIST = './dist/css/';
 
 /*
   -- TOP LEVEL FUNCTIONS
@@ -51,11 +50,17 @@ gulp.task('styles', function () {
 });
 
 // Optimise images
-gulp.task('imageMin', () =>
+gulp.task('imageMin', function () {
   gulp.src('src/images/**/*.+(png|jpg|gif|svg)')
     .pipe(imagemin())
-    .pipe(gulp.dest('dist/images'))
-  );
+    .pipe(gulp.dest('dist/images'));
+});
+
+// () =>
+//   gulp.src('src/images/**/*.+(png|jpg|gif|svg)')
+//     .pipe(imagemin())
+//     .pipe(gulp.dest('dist/images'))
+//   );
 
 // Minify JS
 gulp.task('minify', function () {
@@ -75,16 +80,22 @@ gulp.task('scripts', function () {
 gulp.task('browserSync', function () {
   browserSync.init({
     server: {
-      baseDir: 'src',
-    },
+        baseDir: './dist',
+      },
   });
+
+  // NOTE: the .watch() method will not receive
+  // these options automatically, so you must provide
+  // them manually in the following way
+  browserSync.watch(
+    ['dist/*.css'], { ignored: '*.map.css' });
 });
 
-gulp.task('default', ['copyHtml', 'styles', 'imageMin', 'scripts']);
+gulp.task('default', ['copyHtml', 'styles', 'scripts', 'imageMin', 'browserSync', 'watch']);
 
 gulp.task('watch', function () {
   gulp.watch('src/*.html', ['copyHtml']).on('change', browserSync.reload);
   gulp.watch('src/images/*', ['imageMin']);
-  gulp.watch('src/sass/*.scss', ['styles']).on('change', browserSync.reload);
+  gulp.watch('src/scss/*.scss', ['styles']).on('change', browserSync.reload);
   gulp.watch('src/js/*.js', ['scripts']).on('change', browserSync.reload);
 });
