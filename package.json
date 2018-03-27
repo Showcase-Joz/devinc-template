@@ -27,21 +27,16 @@
   "homepage": "https://github.com/Showcase-Joz/devinc-template#readme",
   "devDependencies": {
     "browser-sync": "^2.23.6",
-    "cssnext": "^1.8.4",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^5.0.0",
-    "gulp-clean-css": "^3.9.3",
     "gulp-concat": "^2.6.1",
     "gulp-imagemin": "^4.1.0",
-    "gulp-postcss": "^7.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-size": "^3.0.0",
-    "gulp-svgmin": "^1.2.4",
+    "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0",
-    "gulp-uglifycss": "^1.0.9",
-    "merge-stream": "^1.0.1",
-    "svgo": "^1.0.5"
+    "merge-stream": "^1.0.1"
   },
   "dependencies": {
     "normalize.css": "^8.0.0"
