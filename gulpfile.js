@@ -7,8 +7,6 @@ const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
 const merge = require('merge-stream');
 const autoprefixer = require('gulp-autoprefixer');
-const svgmin = require('gulp-svgmin');
-const cleancss = require('gulp-clean-css');
 const size = require('gulp-size');
 const browserSync = require('browser-sync').create();
 
@@ -26,8 +24,19 @@ var scssDIST = './dist/css/';
 
 // Copy all HTML files
 gulp.task('copyHtml', function () {
-  gulp.src('src/*.html')
+  gulp.src([
+    'src/*.html',
+    'src/*.webmanifest',
+    'src/*.xml',
+    'src/*.txt',
+  ])
     .pipe(gulp.dest('dist'));
+});
+
+// Custom copy files
+gulp.task('customCopy', function () {
+  gulp.src('src/js/aws.js')
+    .pipe(gulp.dest('dist/js'));
 });
 
 // Compile SCSS  [create sourcemap, add vendor prefixes, copress, rename (.min) and write ]
@@ -53,6 +62,11 @@ gulp.task('styles', function () {
 gulp.task('imageMin', function () {
   gulp.src('src/images/**/*.+(png|jpg|gif|svg)')
     .pipe(imagemin())
+    .pipe(size({
+      title: 'Image sizes after task ',
+      pretty: true,
+      showTotal: true,
+    }))
     .pipe(gulp.dest('dist/images'));
 });
 
@@ -71,7 +85,7 @@ gulp.task('minify', function () {
 
 // Concat scripts
 gulp.task('scripts', function () {
-  gulp.src('src/js/*.js')
+  gulp.src(['src/js/*.js','!src/js/aws.js'])
   .pipe(concat('main.js'))
   .pipe(uglify())
   .pipe(gulp.dest('dist/js'));
@@ -91,7 +105,7 @@ gulp.task('browserSync', function () {
     ['dist/*.css'], { ignored: '*.map.css' });
 });
 
-gulp.task('default', ['copyHtml', 'styles', 'scripts', 'imageMin', 'browserSync', 'watch']);
+gulp.task('default', ['copyHtml', 'customCopy', 'styles', 'scripts', 'imageMin', 'browserSync', 'watch']);
 
 gulp.task('watch', function () {
   gulp.watch('src/*.html', ['copyHtml']).on('change', browserSync.reload);
