@@ -5,53 +5,15 @@
   ++Do not remove the back-link in this web template
 -------------------------------------------------------
 
-    Table of Content
-==========================================
-    #Preloader
-    #Basic Styles
-    #Site Styles
-        ++ Header
-        ++ Nav
-        ++ Section
-        ++ Aside
-        ++ Footer
-    #Additional Typography
-    #Links
-    #Lists
-    #Images
-    #Buttons
-    #Forms
-    #Misc
-    #Accessibility
-    #Media Queries
-*/
+@import '_resets-2018';
+@import '_functions';
+@import '_palette';
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
 
 
-
-/* #Preloader */
-/* #Preloader END */
-/* #Basic Styles */
-/* #Basic Styles END */
-/* #Site Styles */
-/* ----------- ++ Header ----------- */
-/* ----------- ++ Nav ----------- */
-/* ----------- ++ Section ----------- */
-/* ----------- ++ Aside ----------- */
-/* ----------- ++ Footer ----------- */
-/* #Site Styles END */
-/* #Additional Typography */
-/* #Additional Typography END */
-/* #Links */
-/* #Links END */
-/* #Lists */
-/* #Lists END */
-/* #Images */
-/* #Images END */
-/* #Buttons */
-/* #Buttons END */
-/* #Forms */
-/* #Forms END */
-/* #Misc */
-/* #Misc END */
-/* #Accessibility */
-/* #Accessibility END */
+html {
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  /* font-size: 14px; */
+}
