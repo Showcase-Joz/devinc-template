@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const babel = require('gulp-babel');
 const rename = require('gulp-rename');
 const imagemin = require('gulp-imagemin');
 const uglify = require('gulp-uglify');
