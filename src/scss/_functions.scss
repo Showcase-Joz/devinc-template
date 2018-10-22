@@ -1,0 +1,16 @@
+
+@function set-text-color($bg-color){
+  @if(lightness($bg-color) >50) {
+    @return #000;
+  } @else {
+    @return #fff;
+  }
+}
+
+/* mixin for multiline */
+@mixin truncate($truncation-boundary) {
+    max-width: $truncation-boundary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
